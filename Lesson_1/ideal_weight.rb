@@ -6,4 +6,4 @@ height = gets.chomp.to_i
 
 weight = (height - 110) * 1.15
 
-weight.positive? ? puts("#{name}, ваш идеальный вес: #{weight}") : puts("У вас оптимальный вес")
+puts weight.positive? ? ("#{name}, ваш идеальный вес: #{weight}") : ("#{name}, у вас оптимальный вес")

@@ -1,22 +1,13 @@
 
-puts "Введите 1 сторону:"
-side_1 = gets.chomp.to_i
+puts "Введите 3 стороны:"
 
-puts "Введите 2 сторону:"
-side_2 = gets.chomp.to_i
+s1, s2, s3 = [gets.to_i, gets.to_i, gets.to_i].sort
 
-puts "Введите 3 сторону:"
-side_3 = gets.chomp.to_i
-
-triangle = [side_1, side_2, side_3]
-
-hypotenuse = triangle.sort![2]
-
-if hypotenuse**2 == triangle[0]**2 + triangle[1]**2
+if s3**2 == s1**2 + s2**2
   puts "Треугольник является прямоугольным"
-elsif hypotenuse && triangle[0] == triangle[1]
+elsif s3 && s1 == s2
   puts "Треугольник является равносторонним"
-elsif hypotenuse == triangle[0] || hypotenuse == triangle[1] || triangle[0] == triangle[1]
+elsif s3 == s1 || s3 == s2
     puts "Треугольник является равнобедренным"
 else
   puts "Это разносторонний треугольник"
