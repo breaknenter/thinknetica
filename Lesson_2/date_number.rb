@@ -29,7 +29,10 @@ year = gets.to_i
 
 # +1 день к февралю, если год високосный
 # ключ 2, если вместо массива -- хеш
-days_in_month[1] += 1 if (year % 4).zero? || (year % 100).zero? && (year % 400).zero?
+if (year % 4).zero? && (year % 100).nonzero? || (year % 400).zero?
+  days_in_month[1] += 1
+  puts "Год #{year} високосный"
+end
 
 =begin
 
@@ -50,4 +53,4 @@ puts "Порядковый номер даты: #{sum + day}"
 
 =end
 
-puts "Порядковый номер даты: #{days_in_month[0, month - 1].sum + day}"
+puts "Порядковый номер даты: #{days_in_month.take(month - 1).sum + day}" # take -- "взять" первые n элементов
