@@ -15,6 +15,6 @@ class Station
   end
 
   def trains_by_type(type) # :pass :freight
-    @trains.each.with_object([]) { |el, trains| trains << @trains[train] if @trains[train] == type }
+    @trains.each_with_object([]) { |train, trains| trains << train if train.type == type }
   end
 end
