@@ -1,4 +1,5 @@
 class Route
+  attr_reader :route
   def initialize(from, to)
     @route = [from, to]
   end
@@ -9,9 +10,5 @@ class Route
 
   def del_station(station)
     @route.delete(station)
-  end
-
-  def stations
-    @route
   end
 end

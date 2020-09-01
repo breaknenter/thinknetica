@@ -12,7 +12,7 @@ puts "Промежуточная остановка \"Хабаровск\""
 route.add_station("Хабаровск")
 
 puts "Список всех станций:"
-puts route.stations
+puts route.route
 
 puts "Задаём маршрут поезду N: #{train.number}"
 train.route(route)

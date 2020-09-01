@@ -34,7 +34,7 @@ class Train
   end
 
   def forth
-    @current += 1 if @current < @route.stations.size
+    @current += 1 if last_station?
   end
 
   def back
@@ -42,14 +42,20 @@ class Train
   end
 
   def current
-    @route.stations[@current]
+    @route.route[@current]
   end
 
   def next_station
-    @route.stations[@current + 1] if @current < @route.stations.size
+    @route.route[@current + 1] if last_station?
   end
 
   def prev_station
-    @route.stations[@current - 1] if @current.positive?
+    @route.route[@current - 1] if @current.positive?
+  end
+
+  private
+
+  def last_station?
+    @current < @route.route.size
   end
 end
