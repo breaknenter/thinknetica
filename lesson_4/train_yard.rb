@@ -77,11 +77,10 @@ class TrainYard
     from = gets.chomp.to_s
 
     @routes.each do |route|
-      if route.way.first == from
+      next unless route.way.first == from
         @trains.each do |train|
           train.route(route: route) if train.number == number
         end
-      end
     end
   end
 
@@ -113,11 +112,7 @@ class TrainYard
     print "Укажите N поезда: "
     number = gets.to_i
 
-    train = nil
-
-    @trains.each do |el|
-      train = el if el.number == number
-    end
+    train = @trains.detect { |train| train.number == number }
 
     print "Отправляемся: следующая станция[1] предыдущая[2]"
 
@@ -136,12 +131,12 @@ class TrainYard
     opt = gets.to_i
 
     if opt == 1
-      @stations.each_with_index do |station, number|
-        puts "Станция N#{number + 1} - #{station}"
+      @stations.each.with_index(1) do |station, number|
+        puts "Станция N#{number} - #{station}"
       end
     else
-      @trains.each_with_index do |train, number|
-        puts "\##{number + 1} Поезд N: #{train}"
+      @trains.each.with_index(1) do |train, number|
+        puts "\##{number} Поезд N: #{train}"
       end
     end
   end

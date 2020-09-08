@@ -27,18 +27,24 @@ class Train
   end
 
   def prev_station
-    @current -= 1 if @current.positive?
+    @current -= 1 if @current.positive? # FIX positive?
   end
 
   def attach(car:)
-    @cars << car if @speed.zero?
+    @cars << car if stopped?
   end
 
   def detach!
-    @cars.pop if @speed.zero? && !@cars.empty? # FIX empty?
+    @cars.pop if stopped? && !@cars.empty? # FIX empty?
   end
 
   def to_s
     "#{@number}"
+  end
+
+  private
+
+  def stopped?
+    @speed.zero?
   end
 end
