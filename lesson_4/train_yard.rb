@@ -78,9 +78,9 @@ class TrainYard
 
     @routes.each do |route|
       next unless route.way.first == from
-        @trains.each do |train|
-          train.route(route: route) if train.number == number
-        end
+      @trains.each do |train|
+        train.route(route: route) if train.number == number
+      end
     end
   end
 
