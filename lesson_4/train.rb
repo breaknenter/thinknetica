@@ -1,12 +1,25 @@
+require_relative "instance_counter"
+require_relative "manufacturer"
+
 class Train
+  include Manufacturer
+
   attr_reader :number
   attr_reader :type
+
+  @@trains = {}
+
+  def self.find(number:)
+    @@trains[number]
+  end
 
   def initialize(number:, type:) # type: :pass :cargo
     @number = number
     @type   = type
     @cars   = []
     @speed  = 0
+
+    @@trains[number] = self
   end
 
   def speed_up(speed: 10)
@@ -18,7 +31,7 @@ class Train
   end
 
   def route(route:)
-    @route = route
+    @route   = route
     @current = 0
   end
 
@@ -27,7 +40,7 @@ class Train
   end
 
   def prev_station
-    @current -= 1 if @current.positive? # FIX positive?
+    @current -= 1 if @current.positive?
   end
 
   def attach(car:)
@@ -35,7 +48,7 @@ class Train
   end
 
   def detach!
-    @cars.pop if stopped? && !@cars.empty? # FIX empty?
+    @cars.pop if stopped? && !@cars.empty?
   end
 
   def to_s

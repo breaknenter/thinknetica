@@ -8,4 +8,4 @@ require_relative "passenger_car"
 require_relative "cargo_car"
 require_relative "train_yard"
 
-TrainYard.new.run
+TrainYard.instance.run

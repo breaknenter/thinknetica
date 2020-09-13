@@ -1,4 +1,8 @@
+require "singleton"
+
 class TrainYard
+  include Singleton
+
   def initialize
     @stations = []
     @routes   = []
