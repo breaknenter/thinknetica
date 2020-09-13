@@ -4,6 +4,6 @@ class CargoTrain < Train
   def initialize(number:)
     super(number: number, type: :cargo)
 
-    inc_count
+    register_instance
   end
 end

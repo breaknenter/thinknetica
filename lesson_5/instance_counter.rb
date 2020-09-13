@@ -5,25 +5,19 @@ module InstanceCounter
   end
 
   module ClassMethods
-    def init_count
-      @@instances ||= 0
-    end
+    attr_writer :instances
 
-    def count
-      @@instances
-    end
-
-    def plus_one
-      @@instances += 1
+    def instances
+      @instances ||= 0
     end
   end
 
   module InstanceMethods
     private
 
-    def inc_count
-      self.class.init_count
-      self.class.plus_one
+    def register_instance
+      self.class.instances
+      self.class.instances += 1
     end
   end
 end

@@ -4,6 +4,6 @@ class PassengerTrain < Train
   def initialize(number:)
     super(number: number, type: :pass)
 
-    inc_count
+    register_instance
   end
 end

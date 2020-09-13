@@ -17,7 +17,7 @@ class Station
 
     @@stations << self
 
-    inc_count
+    register_instance
   end
 
   def arrival(train:)

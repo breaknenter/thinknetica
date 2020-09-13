@@ -8,7 +8,7 @@ class Route
   def initialize(from:, to:)
     @way = [from, to]
 
-    inc_count
+    register_instance
   end
 
   def add_station(point:)
