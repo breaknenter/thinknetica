@@ -39,6 +39,7 @@ class Station
 
   def valid?
     validate!
+    true
   rescue
     false
   end
@@ -47,6 +48,5 @@ class Station
 
   def valid!
     raise if name !~ NAME_EXP
-    true
   end
 end

@@ -65,6 +65,7 @@ class Train
 
   def valid?
     validate!
+    true
   rescue
     false
   end
@@ -73,7 +74,6 @@ class Train
 
   def validate!
     raise if number !~ NUM_EXP
-    true
   end
 
   def stopped?
