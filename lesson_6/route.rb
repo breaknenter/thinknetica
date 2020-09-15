@@ -1,8 +1,6 @@
 require_relative "instance_counter"
-require_relative "validator"
 
 class Route
-  include Validator
   include InstanceCounter
 
   WAY_EXP = /
@@ -12,8 +10,6 @@ class Route
   attr_reader :way
 
   def initialize(from:, to:)
-    raise unless valid?(val: from, exp: WAY_EXP) && valid?(val: to, exp: WAY_EXP)
-
     @way = [from, to]
 
     register_instance

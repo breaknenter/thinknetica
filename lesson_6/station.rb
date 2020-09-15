@@ -1,8 +1,6 @@
 require_relative "instance_counter"
-require_relative "validator"
 
 class Station
-  include Validator
   include InstanceCounter
 
   NAME_EXP = /
@@ -18,9 +16,8 @@ class Station
   end
 
   def initialize(name:)
-    raise unless valid?(val: name, exp: NAME_EXP)
-
     @name   = name
+    valid!
     @trains = []
 
     @@stations << self
@@ -38,5 +35,18 @@ class Station
 
   def to_s
     "#{@name}"
+  end
+
+  def valid?
+    validate!
+  rescue
+    false
+  end
+
+  private
+
+  def valid!
+    raise if name !~ NAME_EXP
+    true
   end
 end

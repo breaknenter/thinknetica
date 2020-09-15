@@ -3,7 +3,6 @@ require_relative "manufacturer"
 require_relative "validator"
 
 class Train
-  include Validator
   include Manufacturer
 
   NUM_EXP = / # ^[a-z|\d]{3}-?([a-z]{2}|\d{2})$
@@ -22,9 +21,8 @@ class Train
   end
 
   def initialize(number:, type:) # type: :pass :cargo
-    raise unless valid?(val: number, exp: NUM_EXP)
-
     @number = number
+    validate!
     @type   = type
     @cars   = []
     @speed  = 0
@@ -65,7 +63,18 @@ class Train
     "#{@number}"
   end
 
+  def valid?
+    validate!
+  rescue
+    false
+  end
+
   private
+
+  def validate!
+    raise if number !~ NUM_EXP
+    true
+  end
 
   def stopped?
     @speed.zero?
