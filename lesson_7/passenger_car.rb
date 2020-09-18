@@ -3,22 +3,14 @@ class PassengerCar < Car
   attr_reader :occupied
 
   def initialize(number:, seats:)
-    @number   = number
-    @seats    = seats
-    @occupied = 0
-    super(type: :pass)
+    super(type: :pass, number: number, places: seats)
   end
 
   def take_seat
-    raise "Свободных мест нет!" if free_seats.zero?
-    @occupied += 1
-  end
-
-  def free_seats
-    @seats.to_i - @occupied.to_i
+    take(val: 1, msg: "Мест нет")
   end
 
   def to_s
-    "Пассажирский вагон N: #{number}. Мест: #{@seats}, занято: #{@occupied}"
+    "Пассажирский вагон N: #{number}. Мест: #{self.places}, занято: #{self.occupied}"
   end
 end

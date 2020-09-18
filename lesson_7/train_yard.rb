@@ -182,7 +182,9 @@ class TrainYard
     car = train.car(number: car_number)
 
     if train.type == :pass then car.take_seat
-    else car.take_volume
+    else
+      volume = ask "Введите объём: "
+      car.take_volume(val: volume.to_i)
     end
 
     rescue RuntimeError => err

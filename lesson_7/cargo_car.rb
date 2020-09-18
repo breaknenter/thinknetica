@@ -3,22 +3,14 @@ class CargoCar < Car
   attr_reader :occupied
 
   def initialize(number:, volume:)
-    @number   = number
-    @volume   = volume
-    @occupied = 0
-    super(type: :cargo)
+    super(type: :cargo, number: number, places: volume)
   end
 
-  def take_volume
-    raise "Свободного места нет!" if free_volume.zero?
-    @occupied += 1
-  end
-
-  def free_volume
-    @volume - @occupied
+  def take_volume(val:)
+    take(val: val, msg: "Мест нет")
   end
 
   def to_s
-    "Грузовой вагон N: #{number}. Мест: #{@seats}, занято: #{@occupied}"
+    "Грузовой вагон N: #{self.number}. Мест: #{self.places}, занято: #{self.occupied}"
   end
 end
