@@ -22,7 +22,7 @@ class TrainYard
 
       key = ask
 
-      redo unless KEYS[key]
+      KEYS[key] || redo
 
       send(KEYS[key])
     end
