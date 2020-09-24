@@ -17,6 +17,8 @@ class Train
   attr_reader :number
   attr_reader :type
 
+  validate :number, :format, NUM_EXP
+
   @@trains = {}
 
   class << self
@@ -34,7 +36,7 @@ class Train
 
   def initialize(number:, type:)
     @number = number
-    validate!(number, :format, NUM_EXP)
+    validate!
     @type   = type
     @cars   = []
     @speed  = 0

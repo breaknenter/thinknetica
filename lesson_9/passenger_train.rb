@@ -3,6 +3,8 @@
 class PassengerTrain < Train
   include InstanceCounter
 
+  validate :number, :format, NUM_EXP
+
   def initialize(number:)
     super(number: number, type: :pass)
 

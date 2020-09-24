@@ -13,6 +13,8 @@ class Station
 
   attr_reader :name
 
+  validate :name, :format, NAME_EXP
+
   @@stations = []
 
   class << self
@@ -27,7 +29,7 @@ class Station
 
   def initialize(name:)
     @name = name
-    validate!(name, :format, NAME_EXP)
+    validate!
     @trains = []
 
     @@stations << self

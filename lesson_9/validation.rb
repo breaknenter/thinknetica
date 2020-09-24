@@ -5,12 +5,28 @@ module Validation
   end
 
   module ClassMethods
+
+    attr_reader :validates
+
     def validate(name, type, opt = nil)
-      case type
-      when :presence then validate_presence(name)
-      when :format   then validate_format(name, opt)
-      when :type     then validate_type(name, opt)
-      else raise "Неправильный формат"
+      @validates ||= []
+      @validates << [name, type, opt]
+      # instance_variable_set("@validates", [name, type, opt])
+    end
+
+  end
+
+  module InstanceMethods
+    def validate!
+      self.class.validates.each do |el|
+        name, type, opt = el
+        val = instance_variable_get("@#{name}")
+
+        case type
+        when :presence then validate_presence(val)
+        when :format   then validate_format(val, opt)
+        when :type     then validate_type(val, opt)
+        end
       end
     end
 
@@ -26,12 +42,6 @@ module Validation
 
     def validate_type(obj, type)
       raise "Не является инстансом #{type}" unless obj.kind_of?(type)
-    end
-  end
-
-  module InstanceMethods
-    def validate!(name, type, opt = nil)
-      self.class.validate(name, type, opt)
     end
   end
 end
