@@ -1,29 +1,39 @@
 # frozen_string_literal: true
 
 class Deck
-  attr_reader :cards
-
   def initialize
-    @cards = []
+    @cards = create
+  end
 
-    suits  = %i[♥ ♦ ♠ ♣]
-    faces  = %i[A K Q J 10 9 8 7 6 5 4 3 2]
-    values = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+  def create
+    suits  = %i[♥ ♠ ♦ ♣]
+    ranks  = %i[2 3 4 5 6 7 8 9 10 J Q K A]
+    values = [*(2..10), 10, 10, 10, 11]
 
-    card = Struct.new(:suit, :face, :value) do
+    card = Struct.new(:rank, :suit, :value) do
+      def ace?
+        self.rank == :A
+      end
+
+      def back
+        "[?]"
+      end
+
       def to_s
-        "#{self.suit}#{self.face}"
+        "#{self.rank}#{self.suit}"
       end
     end
 
-    suits.each { |suit|
-      faces.each_with_index { |face, this| @cards << card.new(suit, face, values[this]) }
-    }
-
-    @cards.shuffle!
+    suits.each_with_object([]) { |suit, cards|
+      ranks.each_with_index { |rank, this| cards << card.new(rank, suit, values[this]) }
+    }.shuffle!
   end
 
-  def deal(num_of)
-    self.cards.shift(num_of)
+  def deal
+    cards.pop
   end
+
+  private
+
+  attr_reader :cards
 end
